@@ -1,25 +1,3 @@
-dfs:
-  url: 192.168.244.10:8181
-druid:
-  url: jdbc:mysql://119.3.30.5:3307/mask?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
-  username: root
-  password: root
-  driver-class-name: com.mysql.jdbc.Driver
-  minPoolSize: 2
-  maxPoolSize: 10
-  maxIdleTime: 1800000
-  acquireIncrement: 3
-  maxStatements: 1000
-  initialPoolSize: 3
-  idleConnectionTestPeriod: 30
-  acquireRetryAttempts: 30
-  acquireRetryDelay: 1000
-  breakAfterAcquireFailure: false
-  testConnectionOnCheckout: true
-  testConnectionOnCheckin: true
-zookeeper:
-  url: zookeeper://119.3.30.5:2181 #114.115.171.119
-
 mybatis:
   mapper-locations: classpath*:mapping/*.xml
   config-location: classpath:SqlMapConfig.xml
@@ -29,22 +7,43 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 42.192.182.126:8848
+        server-addr: 47.95.192.141:8848
         namespace: 86381884-86d1-481e-8c08-c92d6ef1e80e
         group: dev
   redis:
-    host: 42.192.182.126
+    host: 47.95.192.141
     port: 6379
     password: 1659868245
-  data:
-    mongodb:
-      uri: mongodb://42.192.182.126:27017/mask
-  zipkin:
-    base-url: http://119.3.30.5:9411/
-    sender:
-      type: kafka
-  kafka:
-    bootstrap-servers: 119.3.30.5:9092
+  datasource:
+    url: jdbc:mysql://47.95.192.141:3306/mask_user?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+    username: root
+    password: Mask@2022
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      #监控页
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        reset-enable: false
+      web-stat-filter:
+        enabled: true
+        exclusions: '*.js, *.gif, *.png, *.css, *.ico, /druid/*'
+        url-pattern: /*
+      aop-patterns: cn.mask.mask.label
+      filter:
+        log4j:
+          enabled: true
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+        wall:
+          enabled: true
+          config:
+            drop-table-allow: false
+        slf4j:
+          enabled: true
 
 dubbo:
   scan:
@@ -53,11 +52,11 @@ dubbo:
     name: dubbo
     port: -1
   registry:
-    address: spring-cloud://42.192.182.126
+    address: spring-cloud://47.95.192.141
 csp:
   sentinel:
     dashboard:
-      server: 42.192.182.126:8858
+      server: 47.95.192.141:8858
 management:
   endpoint:
     health:
