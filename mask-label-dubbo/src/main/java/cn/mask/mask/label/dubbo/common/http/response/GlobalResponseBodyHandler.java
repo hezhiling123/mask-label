@@ -23,6 +23,9 @@ public class GlobalResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        return body;
+        if (body instanceof WrapperResponse) {
+            return body;
+        }
+        return WrapperResponse.success(body);
     }
 }
