@@ -1,6 +1,7 @@
 package cn.mask.mask.label.dubbo.service.label;
 
-import hezhiling.mask.label.api.service.label.LabelService;
+import cn.mask.mask.label.api.service.label.LabelService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +17,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     @PostMapping("test")
+//    @PreAuthorize("hasAnyRole('admin')")
     public void addLabel()  {
         System.out.println("invoked");
     }
