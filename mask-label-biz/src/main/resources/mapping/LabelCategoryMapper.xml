@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.label.biz.service.labelcategory.dao.LabelCategoryMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
+        <id column="LABEL_CATEGORY_ID" jdbcType="VARCHAR" property="labelCategoryId"/>
+        <result column="LABEL_CATEGORY_NAME" jdbcType="VARCHAR" property="labelCategoryName"/>
+        <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl"/>
+        <result column="SHARE_URL" jdbcType="VARCHAR" property="shareUrl"/>
+        <result column="ON_SALE" jdbcType="TINYINT" property="onSale"/>
+        <result column="NEW_FLAG" jdbcType="BIT" property="newFlag"/>
+        <result column="HOT_FLAG" jdbcType="TINYINT" property="hotFlag"/>
+        <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
+        <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
+        <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    LABEL_CATEGORY_ID, LABEL_CATEGORY_NAME, PIC_URL, SHARE_URL, ON_SALE, NEW_FLAG, HOT_FLAG, 
+    CRTER_ID, CRTER_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from label_category
+        where LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from label_category
+    where LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
+    insert into label_category (LABEL_CATEGORY_ID, LABEL_CATEGORY_NAME, 
+      PIC_URL, SHARE_URL, ON_SALE, 
+      NEW_FLAG, HOT_FLAG, CRTER_ID, 
+      CRTER_NAME, CRTE_TIME, UPDTER_ID, 
+      UPDTER_NAME, UPDT_TIME)
+    values (#{labelCategoryId,jdbcType=VARCHAR}, #{labelCategoryName,jdbcType=VARCHAR}, 
+      #{picUrl,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, #{onSale,jdbcType=TINYINT}, 
+      #{newFlag,jdbcType=BIT}, #{hotFlag,jdbcType=TINYINT}, #{crterId,jdbcType=VARCHAR}, 
+      #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, #{updterId,jdbcType=VARCHAR}, 
+      #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
+        insert into label_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="labelCategoryId != null">
+                LABEL_CATEGORY_ID,
+            </if>
+            <if test="labelCategoryName != null">
+                LABEL_CATEGORY_NAME,
+            </if>
+            <if test="picUrl != null">
+                PIC_URL,
+            </if>
+            <if test="shareUrl != null">
+                SHARE_URL,
+            </if>
+            <if test="onSale != null">
+                ON_SALE,
+            </if>
+            <if test="newFlag != null">
+                NEW_FLAG,
+            </if>
+            <if test="hotFlag != null">
+                HOT_FLAG,
+            </if>
+            <if test="crterId != null">
+                CRTER_ID,
+            </if>
+            <if test="crterName != null">
+                CRTER_NAME,
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="labelCategoryId != null">
+                #{labelCategoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="labelCategoryName != null">
+                #{labelCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl != null">
+                #{picUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="shareUrl != null">
+                #{shareUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="onSale != null">
+                #{onSale,jdbcType=TINYINT},
+            </if>
+            <if test="newFlag != null">
+                #{newFlag,jdbcType=BIT},
+            </if>
+            <if test="hotFlag != null">
+                #{hotFlag,jdbcType=TINYINT},
+            </if>
+            <if test="crterId != null">
+                #{crterId,jdbcType=VARCHAR},
+            </if>
+            <if test="crterName != null">
+                #{crterName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
+        update label_category
+        <set>
+            <if test="labelCategoryName != null">
+                LABEL_CATEGORY_NAME = #{labelCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="picUrl != null">
+                PIC_URL = #{picUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="shareUrl != null">
+                SHARE_URL = #{shareUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="onSale != null">
+                ON_SALE = #{onSale,jdbcType=TINYINT},
+            </if>
+            <if test="newFlag != null">
+                NEW_FLAG = #{newFlag,jdbcType=BIT},
+            </if>
+            <if test="hotFlag != null">
+                HOT_FLAG = #{hotFlag,jdbcType=TINYINT},
+            </if>
+            <if test="crterId != null">
+                CRTER_ID = #{crterId,jdbcType=VARCHAR},
+            </if>
+            <if test="crterName != null">
+                CRTER_NAME = #{crterName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey"
+            parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
+    update label_category
+    set LABEL_CATEGORY_NAME = #{labelCategoryName,jdbcType=VARCHAR},
+      PIC_URL = #{picUrl,jdbcType=VARCHAR},
+      SHARE_URL = #{shareUrl,jdbcType=VARCHAR},
+      ON_SALE = #{onSale,jdbcType=TINYINT},
+      NEW_FLAG = #{newFlag,jdbcType=BIT},
+      HOT_FLAG = #{hotFlag,jdbcType=TINYINT},
+      CRTER_ID = #{crterId,jdbcType=VARCHAR},
+      CRTER_NAME = #{crterName,jdbcType=VARCHAR},
+      CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
+    where LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>
