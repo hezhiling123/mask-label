@@ -29,7 +29,7 @@
 
     <modules>
         <module>mask-label-api</module>
-        <module>mask-label-dubbo</module>
+        <module>mask-label-biz</module>
     </modules>
 
     <dependencies>
