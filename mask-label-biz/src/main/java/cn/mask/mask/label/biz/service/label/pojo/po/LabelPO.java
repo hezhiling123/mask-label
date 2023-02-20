@@ -12,12 +12,12 @@ public class LabelPO extends BasePO {
     /**
      * 标签ID
      */
-    private Integer labelId;
+    private String labelId;
 
     /**
      * 标签类别ID
      */
-    private Integer labelCategoryId;
+    private String labelCategoryId;
 
     /**
      * 标签名称
@@ -32,7 +32,7 @@ public class LabelPO extends BasePO {
     /**
      * 拥有者ID
      */
-    private Integer ownerId;
+    private String ownerId;
 
     /**
      * 激活时间

@@ -1,11 +1,29 @@
 package cn.mask.mask.label.biz.service.label.dao;
 
+import cn.mask.mask.label.api.service.label.dto.QLabelDTO;
 import cn.mask.mask.label.biz.service.label.pojo.po.LabelPO;
+import cn.mask.mask.model.base.mvc.BaseMapper;
 
-public interface LabelMapper {
+import java.util.List;
+
+public interface LabelMapper extends BaseMapper {
     int deleteByPrimaryKey(Integer labelId);
 
     int insert(LabelPO record);
+
+    /**
+     * 批量插入标签信息
+     * @param labelPOList a list of {@link LabelPO}
+     * @return  插入记录行数
+     */
+    int insertBatch(List<LabelPO> labelPOList);
+
+    /**
+     * 查询标签
+     * @param qLabelDTO {@link QLabelDTO}
+     * @return  a list of {@link LabelPO}
+     */
+    List<LabelPO> listLabel(QLabelDTO qLabelDTO);
 
     int insertSelective(LabelPO record);
 

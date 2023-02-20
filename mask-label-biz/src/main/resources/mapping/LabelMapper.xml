@@ -1,177 +1,257 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.mask.mask.label.biz.service.label.dao.LabelMapper">
-  <resultMap id="BaseResultMap" type="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
-    <id column="LABEL_ID" jdbcType="INTEGER" property="labelId" />
-    <result column="LABEL_CATEGORY_ID" jdbcType="INTEGER" property="labelCategoryId" />
-    <result column="LABEL_NAME" jdbcType="VARCHAR" property="labelName" />
-    <result column="STATE" jdbcType="VARCHAR" property="state" />
-    <result column="OWNER_ID" jdbcType="INTEGER" property="ownerId" />
-    <result column="ACTIVE_TIME" jdbcType="TIMESTAMP" property="activeTime" />
-    <result column="CRTER_ID" jdbcType="INTEGER" property="crterId" />
-    <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName" />
-    <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime" />
-    <result column="UPDTER_ID" jdbcType="INTEGER" property="updterId" />
-    <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName" />
-    <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
+        <id column="LABEL_ID" jdbcType="VARCHAR" property="labelId"/>
+        <result column="LABEL_CATEGORY_ID" jdbcType="VARCHAR" property="labelCategoryId"/>
+        <result column="LABEL_NAME" jdbcType="VARCHAR" property="labelName"/>
+        <result column="STATE" jdbcType="VARCHAR" property="state"/>
+        <result column="OWNER_ID" jdbcType="VARCHAR" property="ownerId"/>
+        <result column="ACTIVE_TIME" jdbcType="TIMESTAMP" property="activeTime"/>
+        <result column="CRTER_ID" jdbcType="String" property="crterId"/>
+        <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
+        <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
+        <result column="UPDTER_ID" jdbcType="String" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     LABEL_ID, LABEL_CATEGORY_ID, LABEL_NAME, STATE, OWNER_ID, ACTIVE_TIME, CRTER_ID, 
     CRTER_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from label
-    where LABEL_ID = #{labelId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from label
+        where LABEL_ID = #{labelId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="listLabel" resultType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
+        select
+        <include refid="Base_Column_List"/>
+        from label
+        where
+        <where>
+            <trim suffixOverrides=" and ">
+                <if test="labelId != null and labelId != ''">
+                    LABEL_ID = #{labelId,jdbcType=VARCHAR}
+                </if>
+                <if test="labelCategoryId != null and labelCategoryId != ''">
+                    LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
+                </if>
+                <if test="labelName != null and labelName != ''">
+                    LABEL_NAME = #{labelName,jdbcType=VARCHAR}
+                </if>
+                <if test="state != null and state != ''">
+                    STATE = #{state,jdbcType=VARCHAR}
+                </if>
+                <if test="ownerId != null and ownerId != ''">
+                    OWNER_ID = #{ownerId,jdbcType=VARCHAR}
+                </if>
+                <if test="activeTime != null and activeTime != ''">
+                    ACTIVE_TIME = #{activeTime,jdbcType=VARCHAR}
+                </if>
+                <if test="crterId != null and crterId != ''">
+                    CRTER_ID = #{crterId,jdbcType=VARCHAR}
+                </if>
+                <if test="crterName != null and crterName != ''">
+                    CRTER_NAME = #{crterName,jdbcType=VARCHAR}
+                </if>
+                <if test="crteTime != null and crteTime != ''">
+                    CRTE_TIME = #{crteTime,jdbcType=VARCHAR}
+                </if>
+                <if test="updterId != null and updterId != ''">
+                    UPDTER_ID = #{updterId,jdbcType=VARCHAR}
+                </if>
+                <if test="updterName != null and updterName != ''">
+                    UPDTER_NAME = #{updterName,jdbcType=VARCHAR}
+                </if>
+                <if test="updtTime != null and updtTime != ''">
+                    UPDT_TIME = #{updtTime,jdbcType=VARCHAR}
+                </if>
+            </trim>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from label
-    where LABEL_ID = #{labelId,jdbcType=INTEGER}
+    where LABEL_ID = #{labelId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
+    <insert id="insert" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
     insert into label (LABEL_ID, LABEL_CATEGORY_ID, LABEL_NAME, 
       STATE, OWNER_ID, ACTIVE_TIME, 
       CRTER_ID, CRTER_NAME, CRTE_TIME, 
       UPDTER_ID, UPDTER_NAME, UPDT_TIME
       )
-    values (#{labelId,jdbcType=INTEGER}, #{labelCategoryId,jdbcType=INTEGER}, #{labelName,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, #{activeTime,jdbcType=TIMESTAMP}, 
-      #{crterId,jdbcType=INTEGER}, #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
-      #{updterId,jdbcType=INTEGER}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}
+    values (#{labelId,jdbcType=VARCHAR}, #{labelCategoryId,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{activeTime,jdbcType=TIMESTAMP}, 
+      #{crterId,jdbcType=VARCHAR}, #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
+      #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
-    insert into label
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="labelId != null">
+    <insert id="insertSelective" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
+        insert into label
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="labelId != null">
+                LABEL_ID,
+            </if>
+            <if test="labelCategoryId != null">
+                LABEL_CATEGORY_ID,
+            </if>
+            <if test="labelName != null">
+                LABEL_NAME,
+            </if>
+            <if test="state != null">
+                STATE,
+            </if>
+            <if test="ownerId != null">
+                OWNER_ID,
+            </if>
+            <if test="activeTime != null">
+                ACTIVE_TIME,
+            </if>
+            <if test="crterId != null">
+                CRTER_ID,
+            </if>
+            <if test="crterName != null">
+                CRTER_NAME,
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="labelId != null">
+                #{labelId,jdbcType=VARCHAR},
+            </if>
+            <if test="labelCategoryId != null">
+                #{labelCategoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="labelName != null">
+                #{labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerId != null">
+                #{ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="activeTime != null">
+                #{activeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crterId != null">
+                #{crterId,jdbcType=VARCHAR},
+            </if>
+            <if test="crterName != null">
+                #{crterName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List" keyProperty="" useGeneratedKeys="true">
+        insert into label (
         LABEL_ID,
-      </if>
-      <if test="labelCategoryId != null">
         LABEL_CATEGORY_ID,
-      </if>
-      <if test="labelName != null">
         LABEL_NAME,
-      </if>
-      <if test="state != null">
         STATE,
-      </if>
-      <if test="ownerId != null">
         OWNER_ID,
-      </if>
-      <if test="activeTime != null">
         ACTIVE_TIME,
-      </if>
-      <if test="crterId != null">
         CRTER_ID,
-      </if>
-      <if test="crterName != null">
-        CRTER_NAME,
-      </if>
-      <if test="crteTime != null">
-        CRTE_TIME,
-      </if>
-      <if test="updterId != null">
+        CRTER_NAME, CRTE_TIME,
         UPDTER_ID,
-      </if>
-      <if test="updterName != null">
-        UPDTER_NAME,
-      </if>
-      <if test="updtTime != null">
-        UPDT_TIME,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="labelId != null">
-        #{labelId,jdbcType=INTEGER},
-      </if>
-      <if test="labelCategoryId != null">
-        #{labelCategoryId,jdbcType=INTEGER},
-      </if>
-      <if test="labelName != null">
-        #{labelName,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerId != null">
-        #{ownerId,jdbcType=INTEGER},
-      </if>
-      <if test="activeTime != null">
-        #{activeTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="crterId != null">
-        #{crterId,jdbcType=INTEGER},
-      </if>
-      <if test="crterName != null">
-        #{crterName,jdbcType=VARCHAR},
-      </if>
-      <if test="crteTime != null">
-        #{crteTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updterId != null">
-        #{updterId,jdbcType=INTEGER},
-      </if>
-      <if test="updterName != null">
-        #{updterName,jdbcType=VARCHAR},
-      </if>
-      <if test="updtTime != null">
-        #{updtTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
+        UPDTER_NAME, UPDT_TIME
+        )
+        values
+        <foreach collection="labelPOList" item="item" index="index" separator=",">
+            (#{item.labelId,jdbcType=VARCHAR},
+            #{item.labelCategoryId,jdbcType=VARCHAR},
+            #{item.labelName,jdbcType=VARCHAR},
+            #{item.state,jdbcType=VARCHAR},
+            #{item.ownerId,jdbcType=VARCHAR},
+            #{item.activeTime,jdbcType=TIMESTAMP},
+            #{item.crterId,jdbcType=VARCHAR},
+            #{item.crterName,jdbcType=VARCHAR},
+            #{item.crteTime,jdbcType=TIMESTAMP},
+            #{item.updterId,jdbcType=VARCHAR},
+            #{item.updterName,jdbcType=VARCHAR},
+            #{item.updtTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
+        update label
+        <set>
+            <if test="labelCategoryId != null">
+                LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR},
+            </if>
+            <if test="labelName != null">
+                LABEL_NAME = #{labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                STATE = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="ownerId != null">
+                OWNER_ID = #{ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="activeTime != null">
+                ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="crterId != null">
+                CRTER_ID = #{crterId,jdbcType=VARCHAR},
+            </if>
+            <if test="crterName != null">
+                CRTER_NAME = #{crterName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where LABEL_ID = #{labelId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
     update label
-    <set>
-      <if test="labelCategoryId != null">
-        LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=INTEGER},
-      </if>
-      <if test="labelName != null">
-        LABEL_NAME = #{labelName,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        STATE = #{state,jdbcType=VARCHAR},
-      </if>
-      <if test="ownerId != null">
-        OWNER_ID = #{ownerId,jdbcType=INTEGER},
-      </if>
-      <if test="activeTime != null">
-        ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="crterId != null">
-        CRTER_ID = #{crterId,jdbcType=INTEGER},
-      </if>
-      <if test="crterName != null">
-        CRTER_NAME = #{crterName,jdbcType=VARCHAR},
-      </if>
-      <if test="crteTime != null">
-        CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updterId != null">
-        UPDTER_ID = #{updterId,jdbcType=INTEGER},
-      </if>
-      <if test="updterName != null">
-        UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
-      </if>
-      <if test="updtTime != null">
-        UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where LABEL_ID = #{labelId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.mask.mask.label.biz.service.label.pojo.po.LabelPO">
-    update label
-    set LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=INTEGER},
+    set LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR},
       LABEL_NAME = #{labelName,jdbcType=VARCHAR},
       STATE = #{state,jdbcType=VARCHAR},
-      OWNER_ID = #{ownerId,jdbcType=INTEGER},
+      OWNER_ID = #{ownerId,jdbcType=VARCHAR},
       ACTIVE_TIME = #{activeTime,jdbcType=TIMESTAMP},
-      CRTER_ID = #{crterId,jdbcType=INTEGER},
+      CRTER_ID = #{crterId,jdbcType=VARCHAR},
       CRTER_NAME = #{crterName,jdbcType=VARCHAR},
       CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
-      UPDTER_ID = #{updterId,jdbcType=INTEGER},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
       UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
       UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
-    where LABEL_ID = #{labelId,jdbcType=INTEGER}
+    where LABEL_ID = #{labelId,jdbcType=VARCHAR}
   </update>
 </mapper>

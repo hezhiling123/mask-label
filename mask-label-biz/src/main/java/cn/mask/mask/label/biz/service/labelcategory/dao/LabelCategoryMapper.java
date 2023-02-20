@@ -1,8 +1,9 @@
 package cn.mask.mask.label.biz.service.labelcategory.dao;
 
 import cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO;
+import cn.mask.mask.model.base.mvc.BaseMapper;
 
-public interface LabelCategoryMapper {
+public interface LabelCategoryMapper extends BaseMapper {
     int deleteByPrimaryKey(String labelCategoryId);
 
     int insert(LabelCategoryPO record);

@@ -1,12 +1,18 @@
-package cn.mask.mask.label.biz.service.labelcategory.pojo.po;
+package cn.mask.mask.label.api.service.labelCategory.dto;
 
-import cn.mask.mask.model.BasePO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
+import java.io.Serializable;
+
+/**
+ * @author hezhiling
+ * @version 1.0
+ * @date 2023-02-12 20:18:35
+ */
 @Data
-public class LabelCategoryPO extends BasePO {
+public class LabelCategoryDTO implements Serializable {
+    private static final long serialVersionUID = -5823643222797627996L;
+
     /**
      * 标签类型Id
      */

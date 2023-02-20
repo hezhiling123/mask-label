@@ -1,12 +1,17 @@
-package cn.mask.mask.label.biz.service.labelcategory.pojo.po;
+package cn.mask.mask.label.api.service.labelCategory.dto;
 
-import cn.mask.mask.model.BasePO;
+import cn.mask.mask.model.dto.page.PageInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @author hezhiling
+ * @version 1.0
+ * @date 2023-02-20 23:04:15
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class LabelCategoryPO extends BasePO {
+public class QLabelCategoryDTO extends PageInfo {
     /**
      * 标签类型Id
      */
@@ -16,17 +21,6 @@ public class LabelCategoryPO extends BasePO {
      * 标签类型名称
      */
     private String labelCategoryName;
-
-    /**
-     * 图片地址
-     */
-    private String picUrl;
-
-    /**
-     * 分项地址
-     */
-    private String shareUrl;
-
     /**
      * 是否上架
      */
