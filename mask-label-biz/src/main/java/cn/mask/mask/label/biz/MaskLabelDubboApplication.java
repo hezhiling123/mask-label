@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@MapperScan("cn.mask.mask.label.dubbo.**.dao")
+@MapperScan("cn.mask.mask.label.biz.**.dao")
 public class MaskLabelDubboApplication {
     public static void main(String[] args) {
         SpringApplication.run(MaskLabelDubboApplication.class, args);

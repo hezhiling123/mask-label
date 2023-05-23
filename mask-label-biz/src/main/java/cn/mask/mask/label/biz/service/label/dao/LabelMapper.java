@@ -3,9 +3,11 @@ package cn.mask.mask.label.biz.service.label.dao;
 import cn.mask.mask.label.api.service.label.dto.QLabelDTO;
 import cn.mask.mask.label.biz.service.label.pojo.po.LabelPO;
 import cn.mask.mask.model.base.mvc.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface LabelMapper extends BaseMapper {
     int deleteByPrimaryKey(Integer labelId);
 

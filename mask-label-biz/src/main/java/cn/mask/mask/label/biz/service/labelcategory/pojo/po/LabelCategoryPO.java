@@ -31,14 +31,4 @@ public class LabelCategoryPO extends BasePO {
      * 是否上架
      */
     private Byte onSale;
-
-    /**
-     * 是否新品
-     */
-    private Boolean newFlag;
-
-    /**
-     * 是否热卖
-     */
-    private Byte hotFlag;
 }

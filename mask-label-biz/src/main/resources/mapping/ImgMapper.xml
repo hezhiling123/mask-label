@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mask.mask.label.biz.service.img.dao.ImgMapper">
+    <resultMap id="BaseResultMap" type="cn.mask.mask.label.biz.service.img.pojo.po.ImgPO">
+        <id column="IMG_ID" jdbcType="VARCHAR" property="imgId"/>
+        <result column="IMG_TYPE" jdbcType="VARCHAR" property="imgType"/>
+        <result column="IMG_TYPE_NAME" jdbcType="VARCHAR" property="imgTypeName"/>
+        <result column="IMG_URL" jdbcType="VARCHAR" property="imgUrl"/>
+        <result column="USED_SYS_CODE" jdbcType="VARCHAR" property="usedSysCode"/>
+        <result column="USED_SYS_NAME" jdbcType="VARCHAR" property="usedSysName"/>
+        <result column="TABEL_NAME" jdbcType="VARCHAR" property="tabelName"/>
+        <result column="TABEL_NAME_DSCR" jdbcType="VARCHAR" property="tabelNameDscr"/>
+        <result column="VALI_FLAG" jdbcType="CHAR" property="valiFlag"/>
+        <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
+        <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
+        <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
+        <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
+        <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    IMG_ID, IMG_TYPE, IMG_TYPE_NAME, IMG_URL, USED_SYS_CODE, USED_SYS_NAME, TABEL_NAME, 
+    TABEL_NAME_DSCR, VALI_FLAG, CRTER_ID, CRTER_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, 
+    UPDT_TIME
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from img
+        where IMG_ID = #{imgId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from img
+    where IMG_ID = #{imgId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.mask.mask.label.biz.service.img.pojo.po.ImgPO">
+    insert into img (IMG_ID, IMG_TYPE, IMG_TYPE_NAME, 
+      IMG_URL, USED_SYS_CODE, USED_SYS_NAME, 
+      TABEL_NAME, TABEL_NAME_DSCR, VALI_FLAG, 
+      CRTER_ID, CRTER_NAME, CRTE_TIME, 
+      UPDTER_ID, UPDTER_NAME, UPDT_TIME
+      )
+    values (#{imgId,jdbcType=VARCHAR}, #{imgType,jdbcType=VARCHAR}, #{imgTypeName,jdbcType=VARCHAR}, 
+      #{imgUrl,jdbcType=VARCHAR}, #{usedSysCode,jdbcType=VARCHAR}, #{usedSysName,jdbcType=VARCHAR}, 
+      #{tabelName,jdbcType=VARCHAR}, #{tabelNameDscr,jdbcType=VARCHAR}, #{valiFlag,jdbcType=CHAR}, 
+      #{crterId,jdbcType=VARCHAR}, #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, 
+      #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="cn.mask.mask.label.biz.service.img.pojo.po.ImgPO">
+        insert into img
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imgId != null">
+                IMG_ID,
+            </if>
+            <if test="imgType != null">
+                IMG_TYPE,
+            </if>
+            <if test="imgTypeName != null">
+                IMG_TYPE_NAME,
+            </if>
+            <if test="imgUrl != null">
+                IMG_URL,
+            </if>
+            <if test="usedSysCode != null">
+                USED_SYS_CODE,
+            </if>
+            <if test="usedSysName != null">
+                USED_SYS_NAME,
+            </if>
+            <if test="tabelName != null">
+                TABEL_NAME,
+            </if>
+            <if test="tabelNameDscr != null">
+                TABEL_NAME_DSCR,
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG,
+            </if>
+            <if test="crterId != null">
+                CRTER_ID,
+            </if>
+            <if test="crterName != null">
+                CRTER_NAME,
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME,
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID,
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME,
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="imgId != null">
+                #{imgId,jdbcType=VARCHAR},
+            </if>
+            <if test="imgType != null">
+                #{imgType,jdbcType=VARCHAR},
+            </if>
+            <if test="imgTypeName != null">
+                #{imgTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="usedSysCode != null">
+                #{usedSysCode,jdbcType=VARCHAR},
+            </if>
+            <if test="usedSysName != null">
+                #{usedSysName,jdbcType=VARCHAR},
+            </if>
+            <if test="tabelName != null">
+                #{tabelName,jdbcType=VARCHAR},
+            </if>
+            <if test="tabelNameDscr != null">
+                #{tabelNameDscr,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                #{valiFlag,jdbcType=CHAR},
+            </if>
+            <if test="crterId != null">
+                #{crterId,jdbcType=VARCHAR},
+            </if>
+            <if test="crterName != null">
+                #{crterName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.mask.mask.label.biz.service.img.pojo.po.ImgPO">
+        update img
+        <set>
+            <if test="imgType != null">
+                IMG_TYPE = #{imgType,jdbcType=VARCHAR},
+            </if>
+            <if test="imgTypeName != null">
+                IMG_TYPE_NAME = #{imgTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="usedSysCode != null">
+                USED_SYS_CODE = #{usedSysCode,jdbcType=VARCHAR},
+            </if>
+            <if test="usedSysName != null">
+                USED_SYS_NAME = #{usedSysName,jdbcType=VARCHAR},
+            </if>
+            <if test="tabelName != null">
+                TABEL_NAME = #{tabelName,jdbcType=VARCHAR},
+            </if>
+            <if test="tabelNameDscr != null">
+                TABEL_NAME_DSCR = #{tabelNameDscr,jdbcType=VARCHAR},
+            </if>
+            <if test="valiFlag != null">
+                VALI_FLAG = #{valiFlag,jdbcType=CHAR},
+            </if>
+            <if test="crterId != null">
+                CRTER_ID = #{crterId,jdbcType=VARCHAR},
+            </if>
+            <if test="crterName != null">
+                CRTER_NAME = #{crterName,jdbcType=VARCHAR},
+            </if>
+            <if test="crteTime != null">
+                CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updterId != null">
+                UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+            </if>
+            <if test="updterName != null">
+                UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+            </if>
+            <if test="updtTime != null">
+                UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where IMG_ID = #{imgId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.mask.mask.label.biz.service.img.pojo.po.ImgPO">
+    update img
+    set IMG_TYPE = #{imgType,jdbcType=VARCHAR},
+      IMG_TYPE_NAME = #{imgTypeName,jdbcType=VARCHAR},
+      IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      USED_SYS_CODE = #{usedSysCode,jdbcType=VARCHAR},
+      USED_SYS_NAME = #{usedSysName,jdbcType=VARCHAR},
+      TABEL_NAME = #{tabelName,jdbcType=VARCHAR},
+      TABEL_NAME_DSCR = #{tabelNameDscr,jdbcType=VARCHAR},
+      VALI_FLAG = #{valiFlag,jdbcType=CHAR},
+      CRTER_ID = #{crterId,jdbcType=VARCHAR},
+      CRTER_NAME = #{crterName,jdbcType=VARCHAR},
+      CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
+      UPDTER_ID = #{updterId,jdbcType=VARCHAR},
+      UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
+      UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
+    where IMG_ID = #{imgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -5,10 +5,7 @@
         <id column="LABEL_CATEGORY_ID" jdbcType="VARCHAR" property="labelCategoryId"/>
         <result column="LABEL_CATEGORY_NAME" jdbcType="VARCHAR" property="labelCategoryName"/>
         <result column="PIC_URL" jdbcType="VARCHAR" property="picUrl"/>
-        <result column="SHARE_URL" jdbcType="VARCHAR" property="shareUrl"/>
         <result column="ON_SALE" jdbcType="TINYINT" property="onSale"/>
-        <result column="NEW_FLAG" jdbcType="BIT" property="newFlag"/>
-        <result column="HOT_FLAG" jdbcType="TINYINT" property="hotFlag"/>
         <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
         <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
         <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
@@ -17,7 +14,7 @@
         <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    LABEL_CATEGORY_ID, LABEL_CATEGORY_NAME, PIC_URL, SHARE_URL, ON_SALE, NEW_FLAG, HOT_FLAG, 
+    LABEL_CATEGORY_ID, LABEL_CATEGORY_NAME, PIC_URL, ON_SALE,
     CRTER_ID, CRTER_NAME, CRTE_TIME, UPDTER_ID, UPDTER_NAME, UPDT_TIME
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -26,145 +23,172 @@
         from label_category
         where LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
     </select>
+
+    <select id="listLabelCategory" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from label_category
+        <where>
+            <trim suffixOverrides=" and ">
+                <if test="labelCategoryId != null and labelCategoryId != ''">
+                    AND LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
+                </if>
+                <if test="labelCategoryName != null and labelCategoryName != ''">
+                    AND LABEL_CATEGORY_NAME = #{labelCategoryName,jdbcType=VARCHAR},
+                </if>
+                <if test="onSale != null and onSale != ''">
+                    AND ON_SALE = #{onSale,jdbcType=TINYINT}
+                </if>
+                <if test="crterId != null and crterId != ''">
+                    AND CRTER_ID = #{crterId,jdbcType=VARCHAR}
+                </if>
+                <if test="crterName != null and crterName != ''">
+                    AND CRTER_NAME = #{crterName,jdbcType=VARCHAR}
+                </if>
+                <if test="crteTime != null and crteTime != ''">
+                    AND CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP}
+                </if>
+                <if test="updterId != null and updterId != ''">
+                    AND UPDTER_ID = #{updterId,jdbcType=VARCHAR}
+                </if>
+                <if test="updterName != null and updterName != ''">
+                    AND UPDTER_NAME = #{updterName,jdbcType=VARCHAR}
+                </if>
+                <if test="updtTime != null and updtTime != ''">
+                    AND UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP}
+                </if>
+            </trim>
+        </where>
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from label_category
     where LABEL_CATEGORY_ID = #{labelCategoryId,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
     insert into label_category (LABEL_CATEGORY_ID, LABEL_CATEGORY_NAME, 
-      PIC_URL, SHARE_URL, ON_SALE, 
-      NEW_FLAG, HOT_FLAG, CRTER_ID, 
+      PIC_URL, ON_SALE, CRTER_ID,
       CRTER_NAME, CRTE_TIME, UPDTER_ID, 
       UPDTER_NAME, UPDT_TIME)
     values (#{labelCategoryId,jdbcType=VARCHAR}, #{labelCategoryName,jdbcType=VARCHAR}, 
-      #{picUrl,jdbcType=VARCHAR}, #{shareUrl,jdbcType=VARCHAR}, #{onSale,jdbcType=TINYINT}, 
-      #{newFlag,jdbcType=BIT}, #{hotFlag,jdbcType=TINYINT}, #{crterId,jdbcType=VARCHAR}, 
-      #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP}, #{updterId,jdbcType=VARCHAR}, 
-      #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP})
+      #{picUrl,jdbcType=VARCHAR}, #{onSale,jdbcType=TINYINT},
+      #{crterId,jdbcType=VARCHAR}, #{crterName,jdbcType=VARCHAR}, #{crteTime,jdbcType=TIMESTAMP},
+      #{updterId,jdbcType=VARCHAR}, #{updterName,jdbcType=VARCHAR}, #{updtTime,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
         insert into label_category
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="labelCategoryId != null">
+            <if test="labelCategoryId != null and labelCategoryId != ''">
                 LABEL_CATEGORY_ID,
             </if>
-            <if test="labelCategoryName != null">
+            <if test="labelCategoryName != null and labelCategoryName != ''">
                 LABEL_CATEGORY_NAME,
             </if>
-            <if test="picUrl != null">
+            <if test="picUrl != null and picUrl != ''">
                 PIC_URL,
             </if>
-            <if test="shareUrl != null">
-                SHARE_URL,
-            </if>
-            <if test="onSale != null">
+            <if test="onSale != null and onSale != ''">
                 ON_SALE,
             </if>
-            <if test="newFlag != null">
-                NEW_FLAG,
-            </if>
-            <if test="hotFlag != null">
-                HOT_FLAG,
-            </if>
-            <if test="crterId != null">
+            <if test="crterId != null and crterId != ''">
                 CRTER_ID,
             </if>
-            <if test="crterName != null">
+            <if test="crterName != null and crterName != ''">
                 CRTER_NAME,
             </if>
-            <if test="crteTime != null">
+            <if test="crteTime != null and crteTime != ''">
                 CRTE_TIME,
             </if>
-            <if test="updterId != null">
+            <if test="updterId != null and updterId != ''">
                 UPDTER_ID,
             </if>
-            <if test="updterName != null">
+            <if test="updterName != null and updterName != ''">
                 UPDTER_NAME,
             </if>
-            <if test="updtTime != null">
+            <if test="updtTime != null and updtTime != ''">
                 UPDT_TIME,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="labelCategoryId != null">
+            <if test="labelCategoryId != null and labelCategoryId != ''">
                 #{labelCategoryId,jdbcType=VARCHAR},
             </if>
-            <if test="labelCategoryName != null">
+            <if test="labelCategoryName != null and labelCategoryName != ''">
                 #{labelCategoryName,jdbcType=VARCHAR},
             </if>
-            <if test="picUrl != null">
+            <if test="picUrl != null and picUrl != ''">
                 #{picUrl,jdbcType=VARCHAR},
             </if>
-            <if test="shareUrl != null">
-                #{shareUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="onSale != null">
+            <if test="onSale != null and onSale != ''">
                 #{onSale,jdbcType=TINYINT},
             </if>
-            <if test="newFlag != null">
-                #{newFlag,jdbcType=BIT},
-            </if>
-            <if test="hotFlag != null">
-                #{hotFlag,jdbcType=TINYINT},
-            </if>
-            <if test="crterId != null">
+            <if test="crterId != null and crterId != ''">
                 #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="crterName != null">
+            <if test="crterName != null and crterName != ''">
                 #{crterName,jdbcType=VARCHAR},
             </if>
-            <if test="crteTime != null">
+            <if test="crteTime != null and crteTime != ''">
                 #{crteTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updterId != null">
+            <if test="updterId != null and updterId != ''">
                 #{updterId,jdbcType=VARCHAR},
             </if>
-            <if test="updterName != null">
+            <if test="updterName != null and updterName != ''">
                 #{updterName,jdbcType=VARCHAR},
             </if>
-            <if test="updtTime != null">
+            <if test="updtTime != null and updtTime != ''">
                 #{updtTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
+    </insert>
+    <insert id="insertBatch">
+        insert into label_category (LABEL_CATEGORY_ID, LABEL_CATEGORY_NAME,
+        PIC_URL, ON_SALE,
+        CRTER_ID, CRTER_NAME, CRTE_TIME,
+        UPDTER_ID, UPDTER_NAME, UPDT_TIME)
+        values
+        <foreach collection="labelCategoryPOList" item="item" index="index" separator=",">
+            (#{item.labelCategoryId,jdbcType=VARCHAR},
+            #{item.labelCategoryName,jdbcType=VARCHAR},
+            #{item.picUrl,jdbcType=VARCHAR},
+            #{item.onSale,jdbcType=TINYINT},
+            #{item.crterId,jdbcType=VARCHAR},
+            #{item.crterName,jdbcType=VARCHAR},
+            #{item.crteTime,jdbcType=TIMESTAMP},
+            #{item.updterId,jdbcType=VARCHAR},
+            #{item.updterName,jdbcType=VARCHAR},
+            #{item.updtTime,jdbcType=TIMESTAMP})
+        </foreach>
     </insert>
     <update id="updateByPrimaryKeySelective"
             parameterType="cn.mask.mask.label.biz.service.labelcategory.pojo.po.LabelCategoryPO">
         update label_category
         <set>
-            <if test="labelCategoryName != null">
+            <if test="labelCategoryName != null and labelCategoryName != ''">
                 LABEL_CATEGORY_NAME = #{labelCategoryName,jdbcType=VARCHAR},
             </if>
-            <if test="picUrl != null">
+            <if test="picUrl != null and picUrl != ''">
                 PIC_URL = #{picUrl,jdbcType=VARCHAR},
             </if>
-            <if test="shareUrl != null">
-                SHARE_URL = #{shareUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="onSale != null">
+            <if test="onSale != null and onSale != ''">
                 ON_SALE = #{onSale,jdbcType=TINYINT},
             </if>
-            <if test="newFlag != null">
-                NEW_FLAG = #{newFlag,jdbcType=BIT},
-            </if>
-            <if test="hotFlag != null">
-                HOT_FLAG = #{hotFlag,jdbcType=TINYINT},
-            </if>
-            <if test="crterId != null">
+            <if test="crterId != null and crterId != ''">
                 CRTER_ID = #{crterId,jdbcType=VARCHAR},
             </if>
-            <if test="crterName != null">
+            <if test="crterName != null and crterName != ''">
                 CRTER_NAME = #{crterName,jdbcType=VARCHAR},
             </if>
-            <if test="crteTime != null">
+            <if test="crteTime != null and crteTime != ''">
                 CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updterId != null">
+            <if test="updterId != null and updterId != ''">
                 UPDTER_ID = #{updterId,jdbcType=VARCHAR},
             </if>
-            <if test="updterName != null">
+            <if test="updterName != null and updterName != ''">
                 UPDTER_NAME = #{updterName,jdbcType=VARCHAR},
             </if>
-            <if test="updtTime != null">
+            <if test="updtTime != null and updtTime != ''">
                 UPDT_TIME = #{updtTime,jdbcType=TIMESTAMP},
             </if>
         </set>
@@ -175,10 +199,7 @@
     update label_category
     set LABEL_CATEGORY_NAME = #{labelCategoryName,jdbcType=VARCHAR},
       PIC_URL = #{picUrl,jdbcType=VARCHAR},
-      SHARE_URL = #{shareUrl,jdbcType=VARCHAR},
       ON_SALE = #{onSale,jdbcType=TINYINT},
-      NEW_FLAG = #{newFlag,jdbcType=BIT},
-      HOT_FLAG = #{hotFlag,jdbcType=TINYINT},
       CRTER_ID = #{crterId,jdbcType=VARCHAR},
       CRTER_NAME = #{crterName,jdbcType=VARCHAR},
       CRTE_TIME = #{crteTime,jdbcType=TIMESTAMP},

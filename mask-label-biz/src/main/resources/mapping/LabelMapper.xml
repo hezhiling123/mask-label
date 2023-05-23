@@ -8,10 +8,10 @@
         <result column="STATE" jdbcType="VARCHAR" property="state"/>
         <result column="OWNER_ID" jdbcType="VARCHAR" property="ownerId"/>
         <result column="ACTIVE_TIME" jdbcType="TIMESTAMP" property="activeTime"/>
-        <result column="CRTER_ID" jdbcType="String" property="crterId"/>
+        <result column="CRTER_ID" jdbcType="VARCHAR" property="crterId"/>
         <result column="CRTER_NAME" jdbcType="VARCHAR" property="crterName"/>
         <result column="CRTE_TIME" jdbcType="TIMESTAMP" property="crteTime"/>
-        <result column="UPDTER_ID" jdbcType="String" property="updterId"/>
+        <result column="UPDTER_ID" jdbcType="VARCHAR" property="updterId"/>
         <result column="UPDTER_NAME" jdbcType="VARCHAR" property="updterName"/>
         <result column="UPDT_TIME" jdbcType="TIMESTAMP" property="updtTime"/>
     </resultMap>

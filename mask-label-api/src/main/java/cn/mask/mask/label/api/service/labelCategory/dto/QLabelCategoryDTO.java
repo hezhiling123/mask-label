@@ -4,6 +4,8 @@ import cn.mask.mask.model.dto.page.PageInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Date;
+
 /**
  * @author hezhiling
  * @version 1.0
@@ -12,6 +14,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class QLabelCategoryDTO extends PageInfo {
+    private static final long serialVersionUID = 5620456421212711372L;
     /**
      * 标签类型Id
      */
@@ -24,15 +27,30 @@ public class QLabelCategoryDTO extends PageInfo {
     /**
      * 是否上架
      */
-    private Byte onSale;
+    private Boolean onSale;
 
     /**
-     * 是否新品
+     * 创建者Id
      */
-    private Boolean newFlag;
-
+    private String crterId;
     /**
-     * 是否热卖
+     * 创建者名称
      */
-    private Byte hotFlag;
+    private String crterName;
+    /**
+     * 创建时间
+     */
+    private Date crteTime;
+    /**
+     * 更新者Id
+     */
+    private String updterId;
+    /**
+     * 更新者名称
+     */
+    private String updterName;
+    /**
+     * 更新时间
+     */
+    private Date updtTime;
 }

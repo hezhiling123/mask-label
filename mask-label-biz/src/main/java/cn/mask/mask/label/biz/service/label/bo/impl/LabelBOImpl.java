@@ -9,6 +9,7 @@ import cn.mask.mask.label.biz.service.label.pojo.po.LabelPO;
 import cn.mask.mask.model.dto.page.PageResult;
 import com.baidu.fsg.uid.impl.DefaultUidGenerator;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import java.util.List;
  * @version 1.0
  * @date 2023-02-13 20:55:47
  */
+@Component
 public class LabelBOImpl implements ILabelBO {
 
     @Resource

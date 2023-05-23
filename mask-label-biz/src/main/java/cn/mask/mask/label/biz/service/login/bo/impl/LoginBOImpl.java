@@ -12,7 +12,7 @@ import cn.mask.mask.label.biz.service.login.pojo.vo.UserVO;
 import cn.mask.mask.user.api.login.dto.WeiXinLoginInfo;
 import cn.mask.mask.user.api.register.dto.RegisterInfoDTO;
 import cn.mask.mask.user.api.register.dto.RegisterResultDTO;
-import cn.mask.mask.user.api.register.dto.UserBaseInfoDTO;
+import cn.mask.mask.user.api.register.dto.UserBaseDTO;
 import cn.mask.mask.user.api.register.dto.weixin.WeiXinRegisterDTO;
 import cn.mask.mask.user.api.register.enums.RegTypeEnum;
 import cn.mask.mask.user.api.register.service.IRegisterService;
@@ -70,14 +70,13 @@ public class LoginBOImpl implements LoginBO {
         QUserDTO qUserDTO = new QUserDTO();
         qUserDTO.setOpenId(openId);
         qUserDTO.setBindType(RegTypeEnum.WEI_XIN.getType());
-        WrapperResponse<UserBaseInfoDTO> queryUserByOpenIdRep = userService.queryUserByCondition(qUserDTO);
+        WrapperResponse<UserBaseDTO> queryUserByOpenIdRep = userService.queryUserByCondition(qUserDTO);
         if (!ResultCode.SUCCESS.getCode().equals(queryUserByOpenIdRep.getCode())) {
             throw new MaskException(queryUserByOpenIdRep.getCode(), queryUserByOpenIdRep.getMessage());
         }
         if (ObjectUtil.isNotNull(queryUserByOpenIdRep.getData())) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(queryUserByOpenIdRep.getData(), userVO);
-            userVO.setNickName(queryUserByOpenIdRep.getData().getUsername());
             return userVO;
         }
 
@@ -89,8 +88,7 @@ public class LoginBOImpl implements LoginBO {
             throw new MaskException(ResultCode.SYS_ERR, "微信注册接口返回结果为空");
         }
         UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(registerRep.getData(), userVO);
-        userVO.setNickName(registerRep.getData().getUserName());
+        BeanUtils.copyProperties(registerRep.getData().getUserBaseDTO(), userVO);
         return userVO;
     }
 
@@ -104,7 +102,7 @@ public class LoginBOImpl implements LoginBO {
     private WeiXinRegisterDTO packWeiXinRegisterDTO(WinXinLoginInfo winXinLoginInfo, String openId) {
         WeiXinRegisterDTO weiXinRegisterDTO = new WeiXinRegisterDTO();
         weiXinRegisterDTO.setOpenId(openId);
-        UserBaseInfoDTO userBaseInfoDTO = new UserBaseInfoDTO();
+        UserBaseDTO userBaseInfoDTO = new UserBaseDTO();
         BeanUtils.copyProperties(winXinLoginInfo.getWeiXinUserInfo(), userBaseInfoDTO);
         userBaseInfoDTO.setUsername(userBaseInfoDTO.getNickName());
         weiXinRegisterDTO.setUserBaseInfo(userBaseInfoDTO);

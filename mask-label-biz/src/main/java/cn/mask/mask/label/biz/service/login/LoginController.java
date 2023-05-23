@@ -46,7 +46,6 @@ public class LoginController {
      */
     @PostMapping("login")
     public WrapperResponse<WeiXinUserInfo> login(LogonDTO logonDTO) {
-
         return null;
     }
 

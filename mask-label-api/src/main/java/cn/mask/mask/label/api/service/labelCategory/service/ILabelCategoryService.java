@@ -1,8 +1,10 @@
 package cn.mask.mask.label.api.service.labelCategory.service;
 
+import cn.mask.mask.common.core.framework.web.WrapperResponse;
 import cn.mask.mask.common.core.framework.web.exception.MaskException;
 import cn.mask.mask.label.api.service.labelCategory.dto.LabelCategoryDTO;
 import cn.mask.mask.label.api.service.labelCategory.dto.QLabelCategoryDTO;
+import cn.mask.mask.model.dto.page.PageResult;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface ILabelCategoryService {
      * @return  a list of {@link QLabelCategoryDTO}
      * @throws MaskException    e
      */
-    List<LabelCategoryDTO> listLabelCategory(QLabelCategoryDTO qLabelCategoryDTO) throws MaskException;
+    WrapperResponse<PageResult<LabelCategoryDTO>> listLabelCategoryByPage(QLabelCategoryDTO qLabelCategoryDTO) throws MaskException;
 
     /**
      * 增加标签类别
@@ -25,5 +27,5 @@ public interface ILabelCategoryService {
      * @param labelCategoryDTOList  {@link LabelCategoryDTO}
      * @throws MaskException    e
      */
-    void addLabelCategory(List<LabelCategoryDTO> labelCategoryDTOList) throws MaskException;
+    WrapperResponse<List<LabelCategoryDTO>> addLabelCategory(List<LabelCategoryDTO> labelCategoryDTOList) throws MaskException;
 }

@@ -3,6 +3,7 @@ package cn.mask.mask.label.api.service.labelCategory.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author hezhiling
@@ -36,15 +37,35 @@ public class LabelCategoryDTO implements Serializable {
     /**
      * 是否上架
      */
-    private Byte onSale;
+    private Boolean onSale;
 
     /**
-     * 是否新品
+     * 创建者ID
      */
-    private Boolean newFlag;
+    private String crterId;
 
     /**
-     * 是否热卖
+     * 创建人姓名
      */
-    private Byte hotFlag;
+    private String crterName;
+
+    /**
+     * 创建时间
+     */
+    private Date crteTime;
+
+    /**
+     * 更新者ID
+     */
+    private String updterId;
+
+    /**
+     * 更新者名称
+     */
+    private String updterName;
+
+    /**
+     * 更新时间
+     */
+    private Date updtTime;
 }

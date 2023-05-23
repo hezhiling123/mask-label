@@ -6,8 +6,7 @@ import cn.mask.mask.label.api.service.label.dto.LabelDTO;
 import cn.mask.mask.label.api.service.label.dto.QLabelDTO;
 import cn.mask.mask.label.api.service.label.service.ILabelService;
 import cn.mask.mask.label.biz.service.label.bo.ILabelBO;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
+import cn.mask.mask.model.dto.page.PageResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,12 +41,12 @@ public class LabelServiceImpl implements ILabelService {
     /**
      * 分页查询标签
      *
-     * @param qLabelByPageDTO {@link QLabelDTO}
+     * @param qLabelDTO {@link QLabelDTO}
      * @return a page list of {@link LabelDTO}
      */
     @Override
     @PostMapping("/listLabelByPage")
-    public WrapperResponse<PageInfo<LabelDTO>> listLabelByPage(@RequestBody Page<QLabelDTO> qLabelByPageDTO) throws MaskException {
-        return WrapperResponse.success(labelBO.listLabelByPage(qLabelByPageDTO));
+    public WrapperResponse<PageResult<LabelDTO>> listLabelByPage(@RequestBody QLabelDTO qLabelDTO) throws MaskException {
+        return WrapperResponse.success(labelBO.listLabelByPage(qLabelDTO));
     }
 }
